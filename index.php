@@ -1,20 +1,26 @@
 <?php
 require_once 'header.php';
 
-if ($_POST['login']) {
-    $login = sanitizeString($_POST['login']);
-    $password = sanitizeString($_POST['password']);
-    $result = queryMysql("SELECT * FROM members WHERE login='$login'");
-    if ($result->num_rows) {
-        $password = hash('ripemd128', "$password");
 
-        $row = $result->fetch_array(MYSQLI_ASSOC);
-        if ($row['password'] === $password) {
-            $_SESSION['login'] = $_POST['login'];
-            header('Location: profile.php');
-        }
+if ($_POST['login']) {
+    if ($_POST['login'] == '' || $_POST['password'] == '') {
+        echo 'Заполните все поля';
     } else {
-        echo "Нет такого пользователя";
+        $login = sanitizeString($_POST['login']);
+        $password = sanitizeString($_POST['password']);
+        $result = queryMysql("SELECT * FROM members WHERE login='$login'");
+        if ($result->num_rows) {
+            $password = hash('ripemd128', "$password");
+
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            if ($row['password'] === $password) {
+                $_SESSION['login'] = $_POST['login'];
+                header('Location: profile.php');
+                exit();
+            }
+        } else {
+            echo 'Нет такого пользователя';
+        }
     }
 }
 

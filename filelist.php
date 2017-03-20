@@ -1,6 +1,13 @@
 <?php
 require_once 'header.php';
 
+
+if ($_GET['delete']) {
+    $delete = $_GET['delete'];
+    queryMysql("UPDATE member_info SET photo = NULL WHERE photo='$delete'");
+    header('Location: filelist.php');
+}
+
 echo "
     <div class=\"container\">
     <h1>Запретная зона, доступ только авторизированному пользователю</h1>
@@ -57,10 +64,4 @@ if ($loggedin) {
 
 } else {
     echo 'Вам закрыт доступ к данной странице';
-}
-
-if ($_GET['delete']) {
-    $delete = $_GET['delete'];
-    queryMysql("UPDATE member_info SET photo=NULL WHERE photo='$photo'");
-    header('Location: filelist.php');
 }

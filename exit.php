@@ -1,7 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Евгений
- * Date: 19.03.2017
- * Time: 20:28
- */
+require_once 'header.php';
+
+destroySession();
+header('Location: index.php');
+

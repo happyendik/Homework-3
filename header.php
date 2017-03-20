@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+//error_reporting(0);
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@ echo '
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Homework-3</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,12 +43,14 @@ if (isset($_SESSION['login'])) {
 function router ()
 {
 $route = $_SERVER['REQUEST_URI'];
-//echo $route;
+//echo '>'.$route.'<';
 $reg = '/\\/reg[.]php/';
 $index = '/\\/index[.]php/';
 $list = '/\\/list[.]php/';
 $filelist = '/\\/filelist[.]php/';
-$pages = [$reg, $index, $list, $filelist];
+$profile = '/\\/profile[.]php/';
+$exit = '/\\/exit[.]php/';
+$pages = [$reg, $index, $list, $filelist, $profile, $exit];
     global $insert0;
     global $insert1;
     global $insert2;
@@ -70,7 +72,13 @@ $pages = [$reg, $index, $list, $filelist];
     } elseif (preg_match("$pages[3]", $route)) {
         $insert3 = 'class="active"';
         return $insert3;
-    }
+    } elseif (preg_match("$pages[4]", $route)) {
+        $insert1 = 'class="active"';
+        return $insert1;
+    } elseif (preg_match("$pages[5]", $route)) {
+    $insert0 = 'class="active"';
+    return $insert0;
+}
 }
 router();
 
@@ -85,12 +93,12 @@ if ($loggedin) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="profile.php">Hi, $login</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li $insert1><a href="index.php">Авторизация</a></li>
-            <li $insert0><a href="reg.php">Регистрация</a></li>
+            <li $insert1><a href="profile.php">Профиль</a></li>
+            <li $insert0><a href="exit.php">Выход</a></li>
             <li $insert2><a href="list.php">Список пользователей</a></li>
             <li $insert3><a href="filelist.php">Список файлов</a></li>
           </ul>
@@ -110,11 +118,11 @@ _END;
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Homework-3</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li $inesrt1><a href="index.php">Авторизация</a></li>
+            <li $insert1><a href="index.php">Авторизация</a></li>
             <li $insert0><a href="reg.php">Регистрация</a></li>
           </ul>
         </div><!--/.nav-collapse -->

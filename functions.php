@@ -25,3 +25,4 @@ function sanitizeString($var)
     $var = stripslashes($var);
     return $connection->real_escape_string($var);
 }
+

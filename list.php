@@ -1,6 +1,13 @@
 <?php
 require_once 'header.php';
 
+if ($_GET['delete']) {
+    $delete = $_GET['delete'];
+    queryMysql("DELETE FROM member_info WHERE member_login='$delete'");
+    queryMysql("DELETE FROM members WHERE login='$delete'");
+    header('Location: list.php');
+}
+
 echo "
      <div class=\"container\">
     <h1>Запретная зона, доступ только авторизированному пользователю</h1>
@@ -65,11 +72,4 @@ if ($loggedin) {
 
 } else {
     echo 'Вам закрыт доступ к данной странице';
-}
-
-if ($_GET['delete']) {
-    $delete = $_GET['delete'];
-    queryMysql("DELETE FROM member_info WHERE member_login='$delete'");
-    queryMysql("DELETE FROM members WHERE login='$delete'");
-    header('Location: list.php');
 }
